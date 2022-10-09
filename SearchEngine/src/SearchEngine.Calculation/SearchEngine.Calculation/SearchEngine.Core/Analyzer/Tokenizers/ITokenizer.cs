@@ -4,6 +4,6 @@ namespace MySearchEngine.Core.Analyzer
 {
     public interface ITokenizer
     {
-        IEnumerable<Token> Tokenize(string text);
+        IEnumerable<Token> Tokenize(string text, string documentId);
     }
 }

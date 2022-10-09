@@ -17,8 +17,6 @@ namespace SearchEngine.Calculation.Calculation
             PageToTermFrequency = new Dictionary<Page, int>();
         }
 
-        // Contains all pages that contain the term, and the termfrequency for
-        // that term in that page.
         public Dictionary<Page, int> PageToTermFrequency;
 
         public double GetTfidf(Page p) => (1 + Math.Log10(PageToTermFrequency[p])) * idf;

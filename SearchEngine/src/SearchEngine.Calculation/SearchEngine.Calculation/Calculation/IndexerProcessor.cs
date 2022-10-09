@@ -14,28 +14,24 @@ namespace SearchEngine.Calculation.Calculation
         {
             allPages = GetAllPages();
             termIdGenerator = new GlobalTermIdGenerator();
-
-            //tokenize and index all pages
             var analyzer = AnalyzerBuilder.BuildTextAnalyzer(termIdGenerator);
             index = new InvertedIndex(allPages.Count());
 
             Parallel.ForEach(allPages, p =>
             {
                 var textAnalyzer = AnalyzerBuilder.BuildTextAnalyzer(termIdGenerator);
-                var tokens = textAnalyzer.Analyze(p.SiteText);
+                var tokens = textAnalyzer.Analyze(p.SiteText, p.Id.ToString());
                 if (tokens != null)
                 {
                     p.Tokens = tokens;
                     index.IndexPage(p);
                 }
             });
-
-            index.InitialiseIndex();
         }
 
-        public IInvertedIndex CreateIndex()
+        public int CountDocumentsCount()
         {
-            return index;
+            return allPages.Count();
         }
 
         private IEnumerable<Page> GetAllPages()

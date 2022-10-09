@@ -11,6 +11,7 @@ namespace Indexer.Models
         public int Id { get; private set; }
         public string Term { get; set; }
         public List<int> Positions { get; set; }
+        public List<string> PositionInDocuments { get; set; }
 
         public int TermsInDoc => Positions.Count;
 
@@ -18,6 +19,7 @@ namespace Indexer.Models
         {
             Term = term;
             Positions = new List<int>();
+            PositionInDocuments = new List<string>();
         }
 
         public void SetId(int id)

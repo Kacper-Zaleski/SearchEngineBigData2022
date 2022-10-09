@@ -25,15 +25,11 @@ namespace MySearchEngine.Core.Analyzer
             this.tokenFilters = tokenFilters;
         }
 
-        public List<Token> Analyze(string text)
+        public List<Token> Analyze(string text, string documentId)
         {
             var filteredText = text;
-            //if (characterFilters?.Count > 0)
-            //{
-            //    filteredText = characterFilters.Aggregate(filteredText, (current, characterFilter) => characterFilter.Filter(current));
-            //}
 
-            var tokens = tokenizer.Tokenize(filteredText).ToList();
+            var tokens = tokenizer.Tokenize(filteredText, documentId).ToList();
 
             if (tokenFilters?.Count > 0)
             {

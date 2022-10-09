@@ -8,7 +8,6 @@ namespace SearchEngine.Calculation.Calculation
         int GetTotalDocCount();
         bool TryGetIndexedDocs(string term, out List<TermInDocument> pages);
         bool TryGetDocInfo(int pageId, out DocumentInformation documentInformation);
-
         Task StoreDataAsync();
     }
 }

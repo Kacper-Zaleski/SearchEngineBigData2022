@@ -7,6 +7,5 @@ namespace MySearchEngine.Core.Analyzer
         void IndexPage(Page token);
         IEnumerable<Page> Search(string query);
         int CountAllIndexes();
-        void InitialiseIndex();
     }
 }

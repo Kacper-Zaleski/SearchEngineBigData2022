@@ -5,7 +5,6 @@ using MySearchEngine.Core.Analyzer;
 using SearchEngine.Calculation.SearchEngine.Core.Algorithm;
 using SearchEngine.Calculation.SearchEngine.Core.Analyzer.CharacterFilters;
 
-
 namespace SearchEngine.Calculation.Calculation
 {
     public class AnalyzerBuilder

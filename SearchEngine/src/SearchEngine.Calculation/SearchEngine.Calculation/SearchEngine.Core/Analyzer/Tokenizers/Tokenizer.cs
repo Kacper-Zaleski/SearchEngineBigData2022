@@ -11,9 +11,8 @@ namespace Indexer.Analyzer.Tokenizers
             this.termTokenMapping = new Dictionary<string, Token>();
         }
 
-        public IEnumerable<Token> Tokenize(string text)
+        public IEnumerable<Token> Tokenize(string text, string documentId)
         {
-            // Tokenize by space
             var index = 0;
             var tokenStart = -1;
             while (index <= text.Length)
@@ -23,7 +22,7 @@ namespace Indexer.Analyzer.Tokenizers
                     if (tokenStart >= 0)
                     {
                         var term = text[tokenStart..index];
-                        AddToToken(term, tokenStart);
+                        AddToToken(term, tokenStart, documentId);
                         tokenStart = -1;
                     }
 
@@ -39,19 +38,19 @@ namespace Indexer.Analyzer.Tokenizers
             return termTokenMapping.Values;
         }
 
-        private void AddToToken(string term, int index)
+        private void AddToToken(string term, int index, string documentId)
         {
             var token = termTokenMapping.ContainsKey(term)
                 ? termTokenMapping[term]
                 : new Token(term);
 
             token.Positions.Add(index);
+            token.PositionInDocuments.Add(documentId);
             termTokenMapping.TryAdd(term, token);
         }
 
         private static bool IsLetterOrNumber(char c)
         {
-            //Tokenize letter and digit only
             return !char.IsLetterOrDigit(c);
         }
     }
