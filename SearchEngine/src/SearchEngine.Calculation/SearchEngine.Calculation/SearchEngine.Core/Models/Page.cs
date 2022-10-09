@@ -5,7 +5,7 @@ namespace Indexer.Models
 {
     public class Page
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public Uri Url { get; set; }
         public String Title { get; set; }
         public String SiteText { get; set; }
@@ -13,7 +13,7 @@ namespace Indexer.Models
         public IEnumerable<Token> Tokens { get; set; }
         public Page()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
         }
 
         public override bool Equals(object obj)

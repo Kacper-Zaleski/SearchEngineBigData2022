@@ -46,6 +46,8 @@ namespace SearchEngine.Calculation.Calculation
                 foreach (var line in lines)
                 {
                     var temp = line.Split(": ");
+                    if (temp.Length >= 2 && temp[0].Contains("id"))
+                        page.Id = temp[1];
                     if (temp[0].Contains("url"))
                         page.Url = new Uri(temp[1]);
                     if (temp[0].Contains("sitetext"))
