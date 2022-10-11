@@ -1,6 +1,6 @@
 # Path to Indexer
 --------------------------------
-Case 1 run via Visual Stusio 2019\2022 go to:
+Case 1 run via Visual Studio 2019\2022 go to:
 
 > go to indexer project
 ```
