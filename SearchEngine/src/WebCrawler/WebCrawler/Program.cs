@@ -8,20 +8,6 @@ namespace WebCrawler
         {
             var nameScraper = new WebScraper();
             nameScraper.GetBooks();
-
-
         }
-
-
-
-
     }
-
-
-
-
-
-
-
 }
-
