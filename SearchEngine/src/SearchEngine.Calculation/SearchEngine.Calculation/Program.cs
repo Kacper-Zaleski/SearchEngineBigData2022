@@ -1,16 +1,34 @@
-﻿using MySearchEngine.Core.Analyzer;
-using SearchEngine.Calculation.Calculation;
+﻿using SearchEngine.Calculation.Calculation;
+using SearchEngine.Calculation.SearchEngine.WebCrawler;
 using System.Diagnostics;
 
 class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-        IndexerProcessor index = new IndexerProcessor();
-        stopwatch.Stop();
-        Console.WriteLine($"Elapsed Time of indexing: {stopwatch.ElapsedMilliseconds} ms. Number of documents {index.CountDocumentsCount()}");
-        stopwatch.Start();
+        var stopwatch = Stopwatch.StartNew();
+        var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(5));
+        var index = new IndexerProcessor();
+        var webScraper = new WebScraper();
+        var archiver = new DataArchiver(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName));
+
+        while (await periodicTimer.WaitForNextTickAsync())
+        {
+            try
+            {
+                var books = webScraper.GetBooks();
+
+                archiver.ArchiveData(books.ToList());
+
+                index.Index(books);
+
+                Console.WriteLine(books.Count());
+                Console.WriteLine($"Periodic Time: {stopwatch.ElapsedMilliseconds / 1000}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

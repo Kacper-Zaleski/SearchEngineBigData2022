@@ -1,4 +1,4 @@
-﻿using Indexer.Models;
+﻿using SearchEngine.Calculation.Data;
 
 namespace MySearchEngine.Core.Analyzer
 {

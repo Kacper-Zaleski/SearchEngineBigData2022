@@ -1,5 +1,7 @@
 ﻿using Indexer.Models;
 using MySearchEngine.Core.Analyzer;
+using MySearchEngine.Core.Models;
+using SearchEngine.Calculation.Data;
 using SearchEngine.Calculation.SearchEngine.Core.Algorithm;
 
 namespace SearchEngine.Calculation.Calculation
@@ -7,31 +9,36 @@ namespace SearchEngine.Calculation.Calculation
     internal class IndexerProcessor
     {
         private IIdGenerator<int> termIdGenerator;
-        private IEnumerable<Page> allPages;
         private IInvertedIndex? index = null;
+        private Analyzer analyzer;
 
         public IndexerProcessor()
         {
-            allPages = GetAllPages();
             termIdGenerator = new GlobalTermIdGenerator();
-            var analyzer = AnalyzerBuilder.BuildTextAnalyzer(termIdGenerator);
-            index = new InvertedIndex(allPages.Count());
-
-            Parallel.ForEach(allPages, p =>
-            {
-                var textAnalyzer = AnalyzerBuilder.BuildTextAnalyzer(termIdGenerator);
-                var tokens = textAnalyzer.Analyze(p.SiteText, p.Id.ToString());
-                if (tokens != null)
-                {
-                    p.Tokens = tokens;
-                    index.IndexPage(p);
-                }
-            });
+            analyzer = AnalyzerBuilder.BuildTextAnalyzer(termIdGenerator);
+            index = new InvertedIndex();
         }
 
-        public int CountDocumentsCount()
+        public void Index(IEnumerable<Book> books)
         {
-            return allPages.Count();
+            Parallel.ForEach(books, book =>
+            {
+                var page = new Page();
+
+                var textAnalyzer = AnalyzerBuilder.BuildTextAnalyzer(termIdGenerator);
+                var tokens = textAnalyzer.Analyze($"{book.Title} {book.Author} {book.PageIndex}", book.Id.ToString());
+                if (tokens != null)
+                {
+                    page.Title = book.Title;
+                    page.Author = book.Author;
+                    page.Url = new Uri(book.Href);
+                    page.SiteId = book.PageIndex;
+                    page.Title = book.Title;
+                    page.Tokens = tokens;
+
+                    index.IndexPage(page);
+                }
+            });
         }
 
         private IEnumerable<Page> GetAllPages()

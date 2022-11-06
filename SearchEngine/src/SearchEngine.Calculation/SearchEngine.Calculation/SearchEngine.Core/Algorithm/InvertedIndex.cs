@@ -1,6 +1,6 @@
-﻿using Indexer.Models;
-using MySearchEngine.Core.Models;
+﻿using MySearchEngine.Core.Models;
 using SearchEngine.Calculation.Calculation;
+using SearchEngine.Calculation.Data;
 using SearchEngine.Calculation.SearchEngine.Core.Algorithm;
 using System.Collections.Concurrent;
 
@@ -11,27 +11,22 @@ namespace MySearchEngine.Core.Analyzer
         private ConcurrentDictionary<string, Term> index { get; set; }
 
         private Dictionary<Page, double> vectorLengths;
-        int allPagesCount;
+        private int allPagesCount = 0;
 
-        public InvertedIndex(int allPagesCount)
+        public InvertedIndex()
         {
             this.index = new ConcurrentDictionary<string, Term>();
             this.vectorLengths = new Dictionary<Page, double>();
-            this.allPagesCount = allPagesCount;
         }
 
         public void IndexPage(Page page)
         {
             allPagesCount++;
+
             foreach (var token in page.Tokens)
             {
                 Console.WriteLine($"ID: {token.Id} | Term: {token.Term} | Positions: [{string.Join(", ", token.Positions)}] | Positions Id: [{string.Join(", ", token.PositionInDocuments)}] | Terms in -> documents count: {token.TermsInDoc}");
             }
-        }
-
-        public void Index(Page token)
-        {
-            throw new NotImplementedException();
         }
 
         public int CountAllIndexes()
@@ -43,5 +38,10 @@ namespace MySearchEngine.Core.Analyzer
         {
             throw new NotImplementedException();
         }
+
+        //public string ToString()
+        //{
+        //    return ;
+        //}
     }
 }
