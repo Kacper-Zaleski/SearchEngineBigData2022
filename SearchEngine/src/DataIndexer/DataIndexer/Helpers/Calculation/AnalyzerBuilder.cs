@@ -1,11 +1,9 @@
-﻿using Indexer.Analyzer;
-using Indexer.Analyzer.TokenFilters;
-using Indexer.Analyzer.Tokenizers;
-using MySearchEngine.Core.Analyzer;
-using SearchEngine.Calculation.SearchEngine.Core.Algorithm;
-using SearchEngine.Calculation.SearchEngine.Core.Analyzer.CharacterFilters;
+﻿using DataIndexer.Helpers.Algorithm;
+using DataIndexer.Helpers.CharacterFilters;
+using DataIndexer.Helpers.TokenFilters;
+using DataIndexer.Helpers.Tokenizers;
 
-namespace SearchEngine.Calculation.Calculation
+namespace DataIndexer.Helpers.Calculation
 {
     public class AnalyzerBuilder
     {
