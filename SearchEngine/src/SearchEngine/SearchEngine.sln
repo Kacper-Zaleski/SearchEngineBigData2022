@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchEngineDataBase", "SearchEngineDataBase\SearchEngineDataBase.csproj", "{09A7D5E1-EE7D-4A0E-A87E-C73DAB843D2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchEngine", "SearchEngine\SearchEngine.csproj", "{41C7CCE7-6781-4A04-A913-7C92E87B12B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{09A7D5E1-EE7D-4A0E-A87E-C73DAB843D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09A7D5E1-EE7D-4A0E-A87E-C73DAB843D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09A7D5E1-EE7D-4A0E-A87E-C73DAB843D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09A7D5E1-EE7D-4A0E-A87E-C73DAB843D2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41C7CCE7-6781-4A04-A913-7C92E87B12B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41C7CCE7-6781-4A04-A913-7C92E87B12B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41C7CCE7-6781-4A04-A913-7C92E87B12B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41C7CCE7-6781-4A04-A913-7C92E87B12B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6E075EE9-EABA-4AC2-845D-B6A40FE6D83F}
+		SolutionGuid = {04183737-0401-4A46-8F1D-EE31B1B00A9A}
 	EndGlobalSection
 EndGlobal

@@ -3,7 +3,6 @@ using SearchEngineRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddDbContext<SearchEngineDbContext>(options => options.UseSqlServer());
 
 var app = builder.Build();
