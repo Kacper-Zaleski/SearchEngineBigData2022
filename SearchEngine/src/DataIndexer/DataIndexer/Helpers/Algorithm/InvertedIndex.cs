@@ -1,10 +1,8 @@
-﻿using MySearchEngine.Core.Models;
-using SearchEngine.Calculation.Calculation;
-using SearchEngine.Calculation.Data;
-using SearchEngine.Calculation.SearchEngine.Core.Algorithm;
+﻿using DataIndexer.Helpers.Calculation;
+using DataIndexer.Models;
 using System.Collections.Concurrent;
 
-namespace MySearchEngine.Core.Analyzer
+namespace DataIndexer.Helpers.Algorithm
 {
     public class InvertedIndex : IInvertedIndex
     {

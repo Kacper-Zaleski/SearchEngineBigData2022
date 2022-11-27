@@ -1,12 +1,9 @@
-﻿using Indexer.Models;
-using MySearchEngine.Core.Analyzer;
-using MySearchEngine.Core.Models;
-using SearchEngine.Calculation.Data;
-using SearchEngine.Calculation.SearchEngine.Core.Algorithm;
+﻿using DataIndexer.Helpers.Algorithm;
+using DataIndexer.Models;
 
-namespace SearchEngine.Calculation.Calculation
+namespace DataIndexer.Helpers.Calculation
 {
-    internal class IndexerProcessor
+    internal class IndexerProcessor: IIndexerProcessor
     {
         private IIdGenerator<int> termIdGenerator;
         private IInvertedIndex? index = null;
@@ -19,7 +16,7 @@ namespace SearchEngine.Calculation.Calculation
             index = new InvertedIndex();
         }
 
-        public void Index(IEnumerable<Book> books)
+        public async Task Index(List<Book> books)
         {
             Parallel.ForEach(books, book =>
             {

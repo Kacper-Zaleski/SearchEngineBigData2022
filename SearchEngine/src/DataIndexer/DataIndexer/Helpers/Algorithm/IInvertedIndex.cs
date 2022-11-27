@@ -1,6 +1,6 @@
-﻿using SearchEngine.Calculation.Data;
+﻿using DataIndexer.Models;
 
-namespace MySearchEngine.Core.Analyzer
+namespace DataIndexer.Helpers.Algorithm
 {
     public interface IInvertedIndex
     {

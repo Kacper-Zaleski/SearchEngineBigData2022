@@ -1,6 +1,6 @@
-﻿using Indexer.Models;
+﻿using DataIndexer.Models;
 
-namespace SearchEngine.Calculation.Calculation
+namespace DataIndexer.Helpers.Calculation
 {
     public class Term
     {
