@@ -1,0 +1,11 @@
+namespace SearchEngineRepository.Entity
+{
+    public enum IndexOnType
+    {
+        title,
+        author,
+        language,
+        pageIndex,
+        invocation
+    }
+}
