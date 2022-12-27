@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SearchEngineRepository;
 
@@ -11,9 +12,11 @@ using SearchEngineRepository;
 namespace SearchEngineRepository.Migrations
 {
     [DbContext(typeof(SearchEngineDbContext))]
-    partial class SearchEngineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221206173847_Add_InvertedIndexBooks")]
+    partial class AddInvertedIndexBooks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace SearchEngineRepository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SearchEngineRepository.Entity.BookIndex", b =>
+            modelBuilder.Entity("SearchEngineRepository.Entity.Book", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,9 +38,6 @@ namespace SearchEngineRepository.Migrations
                     b.Property<string>("Href")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("InvertedIndexId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Invocation")
                         .IsRequired()
@@ -60,9 +60,7 @@ namespace SearchEngineRepository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvertedIndexId");
-
-                    b.ToTable("Index");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("SearchEngineRepository.Entity.InvertedIndex", b =>
@@ -71,21 +69,49 @@ namespace SearchEngineRepository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("IndexOnType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Word")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("InvertedIndex");
                 });
 
-            modelBuilder.Entity("SearchEngineRepository.Entity.BookIndex", b =>
+            modelBuilder.Entity("SearchEngineRepository.Entity.InvertedIndexBooks", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("InvertedIndexId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvertedIndexId");
+
+                    b.ToTable("InvertedIndexBooks");
+                });
+
+            modelBuilder.Entity("SearchEngineRepository.Entity.InvertedIndexBooks", b =>
                 {
                     b.HasOne("SearchEngineRepository.Entity.InvertedIndex", null)
-                        .WithMany("Indexes")
-                        .HasForeignKey("InvertedIndexId");
+                        .WithMany("Books")
+                        .HasForeignKey("InvertedIndexId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SearchEngineRepository.Entity.InvertedIndex", b =>
                 {
-                    b.Navigation("Indexes");
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

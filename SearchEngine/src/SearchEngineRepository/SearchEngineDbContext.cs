@@ -19,7 +19,8 @@ namespace SearchEngineRepository
         }
 
         public DbSet<InvertedIndex> InvertedIndex { get; set; }
-        public DbSet<BookIndex> Index { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<InvertedIndexBooks> InvertedIndexBooks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +29,11 @@ namespace SearchEngineRepository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<InvertedIndex>()
+                .HasMany(ii => ii.Books)
+                .WithOne()
+                .HasForeignKey(ii => ii.InvertedIndexId);
+
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
             base.OnModelCreating(modelBuilder);
         }
